@@ -99,4 +99,9 @@ class ProductController extends Controller implements HasMiddleware
         return redirect()->route('products.index')
                         ->with('success','Product deleted successfully');
     }
+
+    public function search()
+    {
+        return view('products.list_product');
+    }
 }
