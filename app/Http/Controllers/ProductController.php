@@ -48,6 +48,9 @@ class ProductController extends Controller implements HasMiddleware
         request()->validate([
             'name' => 'required',
             'detail' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'price' => 'required'
         ]);
     
         Product::create($request->all());

@@ -34,5 +34,8 @@
                 {{ $slot }}
             </main>
         </div>
+        @isset($page_script)
+        {{$page_script}}
+        @endisset
     </body>
 </html>
