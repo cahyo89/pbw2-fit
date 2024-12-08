@@ -61,6 +61,7 @@ class ProductController extends Controller implements HasMiddleware
      */
     public function show(string $id)
     {
+        $product=Product::find($id);
         return view('products.show',compact('product'));
     }
 
