@@ -17,16 +17,17 @@
             </ul>
             @auth
                 <ul class="d-flex navbar-nav ">
+                    <li><a class="nav-link" href="{{ route('product.search') }}">Search Product</a></li>
                     <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
                     
                     @canany(['role-update', 'role-list"', 'role-delete'])
                     <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
                     @endcanany
                     
-                    {{-- @can("product-list") --}}
+                    @can("product-list")
 
                     <li><a class="nav-link" href="{{ route('products.index') }}">Manage Product</a></li>
-                    {{-- @endcan --}}
+                    @endcan
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">

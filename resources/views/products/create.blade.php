@@ -96,10 +96,7 @@
                 
            
     
-            // Tambahkan tile layer
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-            }).addTo(map);
+           C
     
             // Event klik pada peta
             map.on('click', function(e) {
