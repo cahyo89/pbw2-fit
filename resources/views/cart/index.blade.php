@@ -74,7 +74,10 @@
                 <h4>Cart Summary</h4>
                 <p>Total Items: {{ $cartCount }}</p>
                 <p>Total Price: Rp{{ number_format($cartItems->sum('total_price'), 2) }}</p>
-                <a href="/checkout" class="btn btn-success">Proceed to Checkout</a>
+                <form action="{{ route('cart.checkout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-success">Checkout</button>
+                </form>
             </div>
         @endif
     </div>

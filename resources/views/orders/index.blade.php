@@ -28,7 +28,7 @@
                                    <td>Rp {{ number_format($order->total_price, 2, ',', '.') }}</td>
                                    <td>{{ $order->status }}</td>
                                    <td>
-                                       <a href="{{ route('customer.orders.show', $order->id) }}" class="btn btn-primary">Detail</a>
+                                       <a href="{{ route('orders.show', $order->id) }}" class="btn btn-primary">Detail</a>
                                    </td>
                                </tr>
                            @empty

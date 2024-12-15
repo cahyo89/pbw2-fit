@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\RoleController;
@@ -28,12 +29,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
     Route::resource('cart', CartController::class);
+    Route::post('cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::resource('orders', CartController::class);
 
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 
 });
  
-Route::post('/payment/midtrans-callback', [App\Http\Controllers\PaymentController::class, 'midtransCallback']);
 
 require __DIR__.'/auth.php';

@@ -125,12 +125,12 @@ class MidtransService
      */
     protected function mapItemsToDetails(Order $order): array
     {
-        return $order->items()->get()->map(function ($item) {
+        return $order->orderDetails()->get()->map(function ($item) {
             return [
                 'id' => $item->id,
                 'price' => $item->price,
                 'quantity' => $item->quantity,
-                'name' => $item->product_name,
+                'name' => $item->product->name,
             ];
         })->toArray();
     }

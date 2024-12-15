@@ -10,6 +10,7 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
+        'order_id',
         'user_id',
         'total_price',
         'status',
@@ -24,4 +25,14 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+    /**
+     * Mendefinisikan relasi dengan payment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+    
 }

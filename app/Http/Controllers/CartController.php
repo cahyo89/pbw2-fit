@@ -127,6 +127,7 @@ class CartController extends Controller
 
         // Buat data order baru
         $order = Order::create([
+            'order_id'=>uniqid(),
             'user_id' => $userId,
             'total_price' => $totalPrice,
             'status' => 'pending', // Status default untuk order

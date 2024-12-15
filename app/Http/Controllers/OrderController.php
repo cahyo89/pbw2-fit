@@ -21,7 +21,7 @@ class OrderController extends Controller
     public function show(MidtransService $midtransService, Order $order)
     {
         // get last payment
-        $payment = $order->payments->last();
+        $payment = $order->payments->last() ?? null;
  
         if ($payment == null || $payment->status == 'EXPIRED') {
             $snapToken = $midtransService->createSnapToken($order);
