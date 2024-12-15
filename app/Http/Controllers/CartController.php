@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
 
 class CartController extends Controller
@@ -102,5 +104,48 @@ class CartController extends Controller
         $cartItem->delete();
 
         return redirect()->route('cart.index')->with('success', 'Item removed from cart');
+    }
+
+     /**
+     * Checkout cart items and create an order.
+     */
+    public function checkout(Request $request)
+    {
+        // Ambil data keranjang berdasarkan user
+        $userId = auth()->id();
+        $cartItems = Cart::where('user_id', $userId)->get();
+
+        // Periksa apakah keranjang kosong
+        if ($cartItems->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Your cart is empty!');
+        }
+
+        // Hitung total harga
+        $totalPrice = $cartItems->sum(function ($cartItem) {
+            return $cartItem->quantity * $cartItem->product->price;
+        });
+
+        // Buat data order baru
+        $order = Order::create([
+            'user_id' => $userId,
+            'total_price' => $totalPrice,
+            'status' => 'pending', // Status default untuk order
+        ]);
+
+        // Simpan detail setiap item ke order_detail
+        foreach ($cartItems as $cartItem) {
+            OrderDetail::create([
+                'order_id' => $order->id,
+                'product_id' => $cartItem->product_id,
+                'quantity' => $cartItem->quantity,
+                'price' => $cartItem->product->price,
+            ]);
+        }
+
+        // Kosongkan keranjang setelah checkout
+        Cart::where('user_id', $userId)->delete();
+
+        // Redirect ke halaman sukses atau detail order
+        return redirect()->route('orders.show', $order->id)->with('success', 'Checkout successful!');
     }
 }
