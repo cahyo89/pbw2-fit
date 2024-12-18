@@ -19,6 +19,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/list-product', [ProductController::class, 'search'])->name("product.search");
+Route::post('/payment/midtrans-callback', [PaymentController::class, 'midtransCallback']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -30,12 +31,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('cart', CartController::class);
     Route::post('cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-    Route::resource('orders', CartController::class);
 
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 
 });
  
+
+
 
 require __DIR__.'/auth.php';

@@ -1,22 +1,5 @@
 <x-app-layout>
-    <x-slot name="app_asset">
-        <style>
-        .bubble-counter {
-            position: relative;
-            display: inline-block;
-        }
-        .bubble-counter .bubble {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: red;
-            color: white;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 12px;
-        }
-        </style>
-    </x-slot>    
+     
     <x-slot name="header">
         <h2>
             {{ __('Cart') }}
